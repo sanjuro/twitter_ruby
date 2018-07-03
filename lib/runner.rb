@@ -20,7 +20,7 @@ class Runner
       printer.display followee
 
       tweets.storage.select{ |value| followers.include?(value[:user]) || followee == value[:user]}.each do |tweet|
-        printer.display "@#{tweet[:user]}: #{tweet[:tweet]}"
+        printer.display "\t@#{tweet[:user]}: #{tweet[:tweet]}"
       end
     end
   end
