@@ -1,8 +1,8 @@
 require 'spec_helper'
-require 'tweet'
+require 'storer'
 
-describe Tweet do
-  subject { Tweet.new(StringIO.new(tweet_lines)) }
+describe TweetStorer do
+  subject { TweetStorer.new(StringIO.new(tweet_lines)) }
 
   it 'use an Array for storage' do
     expect(subject.storage).to be_an(Array)
@@ -21,12 +21,12 @@ describe Tweet do
       it 'tweets must not be longer than 140 characters' do
         tweet = Array.new(4, 'This line is longer than 140 characters.').join(' ')
         line = 'Mr Wilco> ' + tweet
-        list = Tweet.new(StringIO.new(line))
+        list = TweetStorer.new(StringIO.new(line))
         expect(list.storage[0][:tweet].length).to be(139)
       end
 
       it 'allow spaces in usernames' do
-        list = Tweet.new(StringIO.new('Roger Wilco> Testing   one '))
+        list = TweetStorer.new(StringIO.new('Roger Wilco> Testing   one '))
         expect(list.storage[0]). to eq({user: 'Roger Wilco', tweet: 'Testing   one'})
       end
     end

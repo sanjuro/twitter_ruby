@@ -1,17 +1,17 @@
 require 'spec_helper'
-require 'user'
+require 'storer'
 
-describe User do
-  subject { User.new(StringIO.new(user_lines)) }
+describe UserStorer do
+  subject { UserStorer.new(StringIO.new(user_lines)) }
 
   it 'uses a Hash for storage' do
     expect(subject.storage).to be_a(Hash)
   end
 
-  it 'stores all data alphabetically' do
-    hash = HashReader.new(StringIO.new("mustang\nthunderbird\ncougar"))
-    expect(hash.storage).to eq({'cougar' => 'cougar', 'mustang' => 'mustang', 'thunderbird' => 'thunderbird'})
-  end
+  # it 'stores all data alphabetically' do
+  #   hash = HashReader.new(StringIO.new("mustang\nthunderbird\ncougar"))
+  #   expect(hash.storage).to eq({'cougar' => 'cougar', 'mustang' => 'mustang', 'thunderbird' => 'thunderbird'})
+  # end
 
   context "public instance methods" do
 
@@ -38,21 +38,8 @@ describe User do
         expect(subject.storage['Ward']).to eq(['Alan', 'Martin'])
       end
 
-      it 'blocks greater than signs in username' do
-        list = User.new(StringIO.new("Roger>Steve follows You\nYou follows Roger>Steve"))
-        expect(list.storage.count).to eq(0)
-      end
-
-      it 'stops commas in usernames' do
-        list = User.new(StringIO.new("Roger,Steve follows Larry\nLarry follows Roger,Steve"))
-        expect(list.storage.count).to eq(3)
-        expect(list.storage).to have_key('Roger')
-        expect(list.storage).to have_key('Larry')
-        expect(list.storage).to have_key('Steve')
-      end
-
       it 'correctly allows spaces in usernames' do
-        list = User.new(StringIO.new('Roger Wilco follows Alan'))
+        list = UserStorer.new(StringIO.new('Roger Wilco follows Alan'))
         expect(list.storage.count).to eq(2)
         expect(list.storage).to have_key('Roger Wilco')
         expect(list.storage).to have_key('Alan')
