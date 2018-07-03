@@ -1,4 +1,4 @@
-%w{printer reader storer tweet user}.each { |x| require x }
+%w{printer reader storer}.each { |x| require x }
 
 class Runner
   attr_reader :printer
