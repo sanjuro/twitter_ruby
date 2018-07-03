@@ -43,10 +43,6 @@ def tweet_lines
   File.read('tweet.txt')
 end
 
-def output_lines
-  File.read('output.txt')
-end
-
 def empty_file
   File.read('empty.txt')
 end
