@@ -1,0 +1,54 @@
+# Data
+uploads/*
+includes/pdf/*
+
+# Deploy
+Capfile
+config/deploy.rb
+config/deploy/
+config/deploy/development.rb
+config/deploy/staging.rb
+config/deploy/production.rb
+
+# Docker
+/docker/mysql/*
+tmp/*
+
+### Configs ###
+
+
+### Vagrant ###
+.vagrant/
+Vagrantfile
+
+### NetBeans ###
+nbproject/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+### Composer ###
+composer.phar
+
+composer.lock
+
+### Docker ###
+tmp/*
+docker/mysql/*
+
+### Eclipse/ZendStudio
+.buildpath
+.projec
+.settings/
+
+### PHPStorm
+.idea
+atlassian-ide-plugin.xml
+
+### Mac OS
+.DS_Store
+application/.DS_Store
+public/.DS_Store
