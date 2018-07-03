@@ -71,7 +71,7 @@ Ward
 
 Below are the instructions to checkout and build the assessment project.
 
-1. git clone this repo, this should create a twitte folder ->  
+1. git clone this repo, this should create a twitter_ruby folder ->  
     -> git clone git@github.com:sanjuro/twitter_ruby.git
 2. cd to ->  twitter_ruby
 3. run "gem install"
