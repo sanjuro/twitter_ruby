@@ -1,4 +1,4 @@
-%w{printer reader tweet user}.each { |x| require x }
+%w{printer reader storer tweet user}.each { |x| require x }
 
 class Runner
   attr_reader :printer
@@ -13,12 +13,13 @@ class Runner
     raise 'User File is empty' unless !File.zero?(user_file)
     raise 'Tweet File is empty' unless !File.zero?(tweet_file)
 
-    users = User.new(user_file)
-    tweets = Tweet.new(tweet_file)
+    users = UserStorer.new(user_file)
+    tweets = TweetStorer.new(tweet_file)
 
     users.storage.each_pair do |followee, followers|
       printer.display followee
-      tweets.select{ |value| followers.include?(value[:user]) || followee == value[:user]}.each do |tweet|
+
+      tweets.storage.select{ |value| followers.include?(value[:user]) || followee == value[:user]}.each do |tweet|
         printer.display "@#{tweet[:user]}: #{tweet[:tweet]}"
       end
     end

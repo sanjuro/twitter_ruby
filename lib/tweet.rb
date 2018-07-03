@@ -1,15 +1,15 @@
 require 'reader'
+require 'storer'
 
-class Tweet < Reader
+class TweetStorer < Storer
 
   def initialize(input)
     @storage ||= []
+    @reader = TweetReader.new
     super input
   end
 
-  def read(line)
-    matches = line.chomp.split(">")
-    return if matches.nil?
-    storage.push( { user: matches[0].strip, tweet: matches[1][0..139].strip })
+  def store(data)
+    @storage.push( { user: data[:user], tweet: data[:tweet]})
   end
 end

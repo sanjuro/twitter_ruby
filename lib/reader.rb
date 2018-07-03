@@ -3,16 +3,6 @@ class Reader
 
   attr_reader :storage
 
-  def initialize(input)
-    if input.is_a?(String)
-      input = File.open(input) 
-    end
-    
-    input.each_line do |line|
-      read(line)
-    end
-  end
-
   def read(line)
     raise 'Called abstract method: read'
   end
@@ -25,5 +15,21 @@ class Reader
 
   def each(&block)
     @storage.each(&block)
+  end
+end
+
+class TweetReader < Reader
+  def read(line)
+    matches = line.chomp.split(">")
+    return if matches.nil?
+    return {user: matches[0].strip, tweet: matches[1][0..139].strip}
+  end
+end
+
+class UserReader < Reader
+  def read(line)
+    match, followee, followers = line.strip.match(/^([^>,]+) follows (.*)$/).to_a
+    return if match.nil?
+    return {:followee => followee, :followers => followers}
   end
 end
